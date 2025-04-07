@@ -1,0 +1,2 @@
+# Ignore anything with .log in the name
+*.log

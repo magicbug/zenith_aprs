@@ -2,10 +2,11 @@
 <html>
 <head>
     <title>APRS WebSocket Test</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -44,6 +45,14 @@
             width: 200px;
             margin-right: 10px;
         }
+        .clickable-callsign {
+            color: #2196F3;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .clickable-callsign:hover {
+            color: #1976D2;
+        }
     </style>
 </head>
 <body>
@@ -52,13 +61,44 @@
     <div class="controls">
         <input type="text" id="to" placeholder="To callsign" value="APRS">
         <input type="text" id="via" placeholder="Via path" value="WIDE1-1,WIDE2-1">
-        <button onclick="sendTestPacket()">Send Test Packet</button>
+        <input type="text" id="message" placeholder="Message text" style="width: 300px;">
+        <button onclick="sendTestPacket()">Send Message</button>
         <button onclick="sendPosition()">Send Position</button>
     </div>
+    <table id="packetsTable" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
     <script>
         const ws = new WebSocket('ws://localhost:8765');
         const messagesDiv = document.getElementById('messages');
+        let packetsTable;
+
+        $(document).ready(function() {
+            packetsTable = $('#packetsTable').DataTable({
+                order: [[0, 'desc']],
+                pageLength: 10,
+                autoWidth: true,
+                columnDefs: [
+                    { 
+                        targets: 0,
+                        visible: false,
+                        searchable: false
+                    }
+                ]
+            });
+        });
 
         ws.onopen = function() {
             addMessage('Connected to WebSocket server', 'info');
@@ -67,6 +107,22 @@
         ws.onmessage = function(event) {
             const data = JSON.parse(event.data);
             addMessage(`Received: ${JSON.stringify(data)}`, 'received');
+            
+            // Get the source callsign, if it exists
+            const fromCallsign = (data.from || data.source || '').toUpperCase();
+            
+            // Only add to table if we have a valid source callsign
+            if (fromCallsign && fromCallsign !== 'NO SOURCE') {
+                const toCallsign = (data.to ? data.to : (data.destination ? data.destination : 'Broadcast')).toUpperCase();
+                const message = data.data ? data.data : (data.message ? data.message : JSON.stringify(data));
+                
+                packetsTable.row.add([
+                    Date.now(), // Hidden timestamp column for sorting
+                    `<span class="clickable-callsign" onclick="setToCallsign('${fromCallsign}')">${fromCallsign}</span>`,
+                    toCallsign,
+                    message
+                ]).draw(false);
+            }
         };
 
         ws.onerror = function(error) {
@@ -85,15 +141,24 @@
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
         }
 
+        function setToCallsign(callsign) {
+            document.getElementById('to').value = callsign.toUpperCase();
+        }
+
         function sendTestPacket() {
-            const to = document.getElementById('to').value;
-            const via = document.getElementById('via').value;
-            const data = 'Hello from WebSocket!';
+            const to = document.getElementById('to').value.toUpperCase();
+            const via = document.getElementById('via').value.toUpperCase();
+            const message = document.getElementById('message').value;
+            
+            if (!message) {
+                alert('Please enter a message');
+                return;
+            }
             
             const packet = {
                 to: to,
                 via: via,
-                data: data
+                data: message
             };
             
             ws.send(JSON.stringify(packet));
@@ -101,8 +166,8 @@
         }
 
         function sendPosition() {
-            const to = document.getElementById('to').value;
-            const via = document.getElementById('via').value;
+            const to = document.getElementById('to').value.toUpperCase();
+            const via = document.getElementById('via').value.toUpperCase();
             // London position: 51.5074° N, 0.1278° W
             // APRS format: !lat.lonN/lon.lonW_
             const data = '!5130.44N/00007.67W_/A=000001 Test position from London';

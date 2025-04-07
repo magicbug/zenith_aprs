@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>APRS WebSocket Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #messages {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .message {
+            margin-bottom: 5px;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .sent {
+            background-color: #e3f2fd;
+        }
+        .received {
+            background-color: #f1f8e9;
+        }
+        .error {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        button {
+            padding: 8px 16px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 200px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>APRS WebSocket Test</h1>
+    <div id="messages"></div>
+    <div class="controls">
+        <input type="text" id="to" placeholder="To callsign" value="APRS">
+        <input type="text" id="via" placeholder="Via path" value="WIDE1-1,WIDE2-1">
+        <button onclick="sendTestPacket()">Send Test Packet</button>
+        <button onclick="sendPosition()">Send Position</button>
+    </div>
+
+    <script>
+        const ws = new WebSocket('ws://localhost:8765');
+        const messagesDiv = document.getElementById('messages');
+
+        ws.onopen = function() {
+            addMessage('Connected to WebSocket server', 'info');
+        };
+
+        ws.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            addMessage(`Received: ${JSON.stringify(data)}`, 'received');
+        };
+
+        ws.onerror = function(error) {
+            addMessage(`Error: ${error.message}`, 'error');
+        };
+
+        ws.onclose = function() {
+            addMessage('Disconnected from WebSocket server', 'info');
+        };
+
+        function addMessage(message, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            messageDiv.textContent = message;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function sendTestPacket() {
+            const to = document.getElementById('to').value;
+            const via = document.getElementById('via').value;
+            const data = 'Hello from WebSocket!';
+            
+            const packet = {
+                to: to,
+                via: via,
+                data: data
+            };
+            
+            ws.send(JSON.stringify(packet));
+            addMessage(`Sent: ${JSON.stringify(packet)}`, 'sent');
+        }
+
+        function sendPosition() {
+            const to = document.getElementById('to').value;
+            const via = document.getElementById('via').value;
+            // London position: 51.5074° N, 0.1278° W
+            // APRS format: !lat.lonN/lon.lonW_
+            const data = '!5130.44N/00007.67W_/A=000001 Test position from London';
+            
+            const packet = {
+                to: to,
+                via: via,
+                data: data
+            };
+            
+            ws.send(JSON.stringify(packet));
+            addMessage(`Sent position: ${JSON.stringify(packet)}`, 'sent');
+        }
+    </script>
+</body>
+</html> 

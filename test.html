@@ -34,6 +34,7 @@
         }
         .controls {
             margin-top: 20px;
+            margin-bottom: 30px;
         }
         button {
             padding: 8px 16px;
@@ -57,13 +58,14 @@
 </head>
 <body>
     <h1>APRS WebSocket Test</h1>
-    <div id="messages"></div>
+    <div id="messages" style="display: none;"></div>
     <div class="controls">
         <input type="text" id="to" placeholder="To callsign" value="APRS">
         <input type="text" id="via" placeholder="Via path" value="WIDE1-1,WIDE2-1">
         <input type="text" id="message" placeholder="Message text" style="width: 300px;">
         <button onclick="sendTestPacket()">Send Message</button>
         <button onclick="sendPosition()">Send Position</button>
+        <button onclick="toggleDebug()" id="debugButton">Show Debug</button>
     </div>
     <table id="packetsTable" class="display" style="width:100%">
         <thead>
@@ -180,6 +182,19 @@
             
             ws.send(JSON.stringify(packet));
             addMessage(`Sent position: ${JSON.stringify(packet)}`, 'sent');
+        }
+
+        function toggleDebug() {
+            const messagesDiv = document.getElementById('messages');
+            const debugButton = document.getElementById('debugButton');
+            
+            if (messagesDiv.style.display === 'none') {
+                messagesDiv.style.display = 'block';
+                debugButton.textContent = 'Hide Debug';
+            } else {
+                messagesDiv.style.display = 'none';
+                debugButton.textContent = 'Show Debug';
+            }
         }
     </script>
 </body>

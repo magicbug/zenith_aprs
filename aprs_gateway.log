@@ -1347,3 +1347,66 @@ AttributeError: 'PacketEngine' object has no attribute 'signal'
 2025-04-07 19:55:07.853 | INFO     | websocket_server:handle_client:144 - Client disconnected: ('127.0.0.1', 60178). Total clients: 0
 2025-04-07 19:55:07.858 | INFO     | websocket_server:handle_client:77 - New client connecting from ('127.0.0.1', 60186)
 2025-04-07 19:55:07.860 | INFO     | websocket_server:handle_client:81 - Client connected from ('127.0.0.1', 60186). Total clients: 1
+2025-04-07 20:07:36.559 | INFO     | websocket_server:handle_client:144 - Client disconnected: ('127.0.0.1', 60186). Total clients: 0
+2025-04-07 20:07:36.572 | INFO     | websocket_server:handle_client:77 - New client connecting from ('127.0.0.1', 39842)
+2025-04-07 20:07:36.574 | INFO     | websocket_server:handle_client:81 - Client connected from ('127.0.0.1', 39842). Total clients: 1
+2025-04-07 20:09:09.021 | INFO     | websocket_server:handle_client:144 - Client disconnected: ('127.0.0.1', 39842). Total clients: 0
+2025-04-07 20:09:10.124 | INFO     | websocket_server:handle_client:77 - New client connecting from ('127.0.0.1', 33344)
+2025-04-07 20:09:10.125 | INFO     | websocket_server:handle_client:81 - Client connected from ('127.0.0.1', 33344). Total clients: 1
+2025-04-07 20:21:47.835 | INFO     | websocket_server:handle_client:144 - Client disconnected: ('127.0.0.1', 33344). Total clients: 0
+2025-04-07 20:31:43.376 | INFO     | websocket_server:handle_client:77 - New client connecting from ('127.0.0.1', 45736)
+2025-04-07 20:31:43.379 | INFO     | websocket_server:handle_client:81 - Client connected from ('127.0.0.1', 45736). Total clients: 1
+2025-04-07 20:33:13.454 | INFO     | websocket_server:handle_client:144 - Client disconnected: ('127.0.0.1', 45736). Total clients: 0
+2025-04-08 10:37:31.833 | INFO     | __main__:start:44 - Starting APRS Gateway...
+2025-04-08 10:37:31.838 | INFO     | __main__:start:52 - Creating WebSocket server thread
+2025-04-08 10:37:31.839 | INFO     | __main__:start_websocket_server:30 - Creating new event loop for WebSocket server
+2025-04-08 10:37:31.840 | INFO     | __main__:start:58 - Main thread running
+2025-04-08 10:37:31.843 | INFO     | __main__:start_websocket_server:34 - Starting WebSocket server
+2025-04-08 10:37:31.844 | INFO     | websocket_server:start:22 - Attempting to connect to AGWPE server
+2025-04-08 10:37:31.846 | INFO     | agwpe_handler:connect:64 - Connecting to AGWPE server at 192.168.1.207:8000
+2025-04-08 10:37:32.955 | INFO     | agwpe_handler:connect:82 - Enabled packet monitoring, raw AX.25 frames, and own packet monitoring
+2025-04-08 10:37:32.956 | INFO     | agwpe_handler:connect:85 - Successfully connected to AGWPE server
+2025-04-08 10:37:32.957 | INFO     | websocket_server:start:27 - AGWPE connection successful
+2025-04-08 10:37:32.963 | INFO     | websocket_server:start:32 - Hostname: DESKTOP-O70BS2K
+2025-04-08 10:37:32.964 | INFO     | websocket_server:start:33 - Local IP: 127.0.1.1
+2025-04-08 10:37:32.965 | INFO     | websocket_server:start:36 - Attempting to bind WebSocket server to 0.0.0.0:8765
+2025-04-08 10:37:33.028 | INFO     | websocket_server:start:46 - WebSocket server created successfully
+2025-04-08 10:37:33.029 | INFO     | websocket_server:start:58 - Server bound to: ('0.0.0.0', 8765)
+2025-04-08 10:37:33.030 | INFO     | websocket_server:start:59 - Server is listening on: ws://0.0.0.0:8765
+2025-04-08 10:37:33.032 | INFO     | websocket_server:start:64 - Started AGWPE packet receiver
+2025-04-08 10:37:33.033 | INFO     | websocket_server:start:67 - WebSocket server is running
+2025-04-08 10:43:39.601 | INFO     | websocket_server:handle_client:77 - New client connecting from ('127.0.0.1', 51682)
+2025-04-08 10:43:39.605 | INFO     | websocket_server:handle_client:81 - Client connected from ('127.0.0.1', 51682). Total clients: 1
+2025-04-08 11:18:25.142 | INFO     | websocket_server:handle_client:144 - Client disconnected: ('127.0.0.1', 51682). Total clients: 0
+2025-04-08 11:18:25.165 | INFO     | websocket_server:handle_client:77 - New client connecting from ('127.0.0.1', 55346)
+2025-04-08 11:18:25.166 | INFO     | websocket_server:handle_client:81 - Client connected from ('127.0.0.1', 55346). Total clients: 1
+2025-04-08 11:19:49.128 | INFO     | __main__:signal_handler:69 - Received signal 2
+2025-04-08 11:19:49.129 | INFO     | __main__:stop:77 - Stopping APRS Gateway...
+2025-04-08 11:19:49.131 | INFO     | agwpe_handler:disconnect:101 - Disconnected from AGWPE server
+2025-04-08 11:19:50.993 | INFO     | __main__:start:44 - Starting APRS Gateway...
+2025-04-08 11:19:50.999 | INFO     | __main__:start:52 - Creating WebSocket server thread
+2025-04-08 11:19:51.000 | INFO     | __main__:start_websocket_server:30 - Creating new event loop for WebSocket server
+2025-04-08 11:19:51.001 | INFO     | __main__:start:58 - Main thread running
+2025-04-08 11:19:51.003 | INFO     | __main__:start_websocket_server:34 - Starting WebSocket server
+2025-04-08 11:19:51.005 | INFO     | websocket_server:start:22 - Attempting to connect to AGWPE server
+2025-04-08 11:19:51.006 | INFO     | agwpe_handler:connect:64 - Connecting to AGWPE server at 192.168.1.207:8000
+2025-04-08 11:19:52.112 | INFO     | agwpe_handler:connect:82 - Enabled packet monitoring, raw AX.25 frames, and own packet monitoring
+2025-04-08 11:19:52.151 | INFO     | agwpe_handler:connect:85 - Successfully connected to AGWPE server
+2025-04-08 11:19:52.156 | INFO     | websocket_server:start:27 - AGWPE connection successful
+2025-04-08 11:19:52.385 | INFO     | websocket_server:start:32 - Hostname: DESKTOP-O70BS2K
+2025-04-08 11:19:52.388 | INFO     | websocket_server:start:33 - Local IP: 127.0.1.1
+2025-04-08 11:19:52.389 | INFO     | websocket_server:start:36 - Attempting to bind WebSocket server to 0.0.0.0:8765
+2025-04-08 11:19:52.520 | INFO     | websocket_server:start:46 - WebSocket server created successfully
+2025-04-08 11:19:52.521 | INFO     | websocket_server:start:58 - Server bound to: ('0.0.0.0', 8765)
+2025-04-08 11:19:52.522 | INFO     | websocket_server:start:59 - Server is listening on: ws://0.0.0.0:8765
+2025-04-08 11:19:52.522 | INFO     | websocket_server:start:64 - Started AGWPE packet receiver
+2025-04-08 11:19:52.523 | INFO     | websocket_server:start:67 - WebSocket server is running
+2025-04-08 11:19:53.527 | INFO     | websocket_server:handle_client:77 - New client connecting from ('127.0.0.1', 60808)
+2025-04-08 11:19:53.528 | INFO     | websocket_server:handle_client:81 - Client connected from ('127.0.0.1', 60808). Total clients: 1
+2025-04-08 11:19:54.627 | INFO     | websocket_server:handle_client:144 - Client disconnected: ('127.0.0.1', 60808). Total clients: 0
+2025-04-08 11:19:54.629 | INFO     | websocket_server:handle_client:77 - New client connecting from ('127.0.0.1', 60818)
+2025-04-08 11:19:54.629 | INFO     | websocket_server:handle_client:81 - Client connected from ('127.0.0.1', 60818). Total clients: 1
+2025-04-08 11:19:54.631 | INFO     | websocket_server:handle_client:139 - Client connection closed: ('127.0.0.1', 60818)
+2025-04-08 11:19:54.631 | INFO     | websocket_server:handle_client:144 - Client disconnected: ('127.0.0.1', 60818). Total clients: 0
+2025-04-08 11:19:55.728 | INFO     | websocket_server:handle_client:77 - New client connecting from ('127.0.0.1', 48034)
+2025-04-08 11:19:55.729 | INFO     | websocket_server:handle_client:81 - Client connected from ('127.0.0.1', 48034). Total clients: 1

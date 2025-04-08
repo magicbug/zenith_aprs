@@ -54,11 +54,24 @@
         .clickable-callsign:hover {
             color: #1976D2;
         }
+        .macros {
+            margin-bottom: 15px;
+        }
+        .macros button {
+            margin-right: 10px;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <h1>APRS WebSocket Test</h1>
     <div id="messages" style="display: none;"></div>
+    <div class="macros">
+        <button onclick="sendCQ()">CQ</button>
+        <button onclick="sendCallRptGrid()">CALL RPT & GRID</button>
+        <button onclick="sendTu73()">TU 73</button>
+    </div>
     <div class="controls">
         <input type="text" id="to" placeholder="To callsign" value="APRS">
         <input type="text" id="via" placeholder="Via path" value="WIDE1-1,WIDE2-1">
@@ -195,6 +208,32 @@
                 messagesDiv.style.display = 'none';
                 debugButton.textContent = 'Show Debug';
             }
+        }
+
+        function sendCQ() {
+            document.getElementById('to').value = 'CQ';
+            document.getElementById('message').value = 'IO87';
+            sendTestPacket();
+        }
+
+        function sendCallRptGrid() {
+            const to = document.getElementById('to').value;
+            if (!to) {
+                alert('Please enter a callsign first');
+                return;
+            }
+            document.getElementById('message').value = '599 IO87';
+            sendTestPacket();
+        }
+
+        function sendTu73() {
+            const to = document.getElementById('to').value;
+            if (!to) {
+                alert('Please enter a callsign first');
+                return;
+            }
+            document.getElementById('message').value = 'TU 73';
+            sendTestPacket();
         }
     </script>
 </body>

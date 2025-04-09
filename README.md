@@ -25,16 +25,28 @@ A Python-based APRS gateway that connects to an AGWPE server and provides a WebS
 
 ## Configuration
 
-Create a `.env` file with the following settings:
+1. Copy the example environment file:
+   ```bash
+   cp .env.example .env
+   ```
 
-```env
-AGWPE_HOST=localhost
-AGWPE_PORT=8000
-AGWPE_CALLSIGN=YOURCALL
-AGWPE_SSID=0
-WEBSOCKET_HOST=localhost
-WEBSOCKET_PORT=8765
-```
+2. Edit the `.env` file with your settings:
+   ```env
+   AGWPE_HOST=localhost
+   AGWPE_PORT=8000
+   AGWPE_CALLSIGN=YOURCALL
+   AGWPE_SSID=0
+   WEBSOCKET_HOST=localhost
+   WEBSOCKET_PORT=8765
+   ```
+
+   - Set `AGWPE_HOST` to the IP address or hostname of your AGWPE server
+   - Set `AGWPE_PORT` to the port your AGWPE server is listening on (default is 8000)
+   - Set `AGWPE_CALLSIGN` to your amateur radio callsign
+   - Set `AGWPE_SSID` to your desired SSID (0-15)
+   - Set `WEBSOCKET_HOST` to the host you want to bind the WebSocket server to
+   - Set `WEBSOCKET_PORT` to your desired WebSocket port
+   - Set `DEBUG` to true if you want detailed logging
 
 ## Usage
 
@@ -76,4 +88,4 @@ Receive packets in JSON format:
 
 ## License
 
-MIT License 
+MIT License
